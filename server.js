@@ -3,16 +3,23 @@ const dotenv = require ('dotenv');
 const colors = require ('colors');
 const bootcampsRoutes = require('./routes/bootcampsRoutes')
 const coursesRoutes = require('./routes/coursesRoutes')
-
-//Construir el objeto de la aplicación
-const app= express();
-app.use('/bootcamps',bootcampsRoutes)
-app.use('/courses', coursesRoutes)
+const conectarDB = require('./config/db')
 
 //Configurar variables de entorno
 dotenv.config(
     {path: './config/.env'}
 )
+//Llamar la conexio de la base de datos
+conectarDB()
+
+//Construir el objeto de la aplicación
+const app= express();
+
+app.use(express.json())
+app.use('/bootcamps',bootcampsRoutes)
+app.use('/courses', coursesRoutes)
+
+
 
 //Prueba de la url
 app.get('/prueba', function(req,res){
@@ -33,5 +40,5 @@ const puerto= process.env.PUERTO
 
 //Servidor de desarrollo
 app.listen(puerto, function(){
-    console.log(`Servidor ejecutando...${puerto}`.bgBlack.blue)
+    console.log(`Servidor ejecutando...${puerto}`.blue)
 })
