@@ -5,14 +5,14 @@ const bootcampSchema = new mongoose.Schema({
     name: {
         type:String,
         unique: true,
-        required:[true,"El bootcamp esta repetido"],
+        required:[true,"Se requiere nombre del bootcamp"],
         maxlength:[20,"El nombre del bootcamp supera el limite de caracteres (20)"]
     },
     phone: {
         type:Number,
         unique: true,
         required:[true,"El númro e telefono esta repetido"],
-        maxlength:[10,"El número de telefono supera el limite de caracteres (10)"]
+        max:[999999999,"El número de telefono supera el limite de caracteres (10)"]
     },
     address: {
         type:String,
@@ -25,7 +25,7 @@ const bootcampSchema = new mongoose.Schema({
     averageRating: Number,
     createdAt: {
         type:Date,
-        required:[true, "Fecha de creación requerida"]
+        default:Date.now
     }
 })
 
