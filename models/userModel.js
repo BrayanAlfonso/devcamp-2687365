@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcryptjs = require('bcryptjs')
 
 //Definie un modelo que solo trabaje con mongo
 const userSchema = new mongoose.Schema({
@@ -24,6 +25,18 @@ const userSchema = new mongoose.Schema({
         required:["La contraseña es requerida"]
     }
 })
+
+userSchema.pre('save', async function(next){
+    //General la sal para el password
+
+    const sal = await bcryptjs.genSalt(3)
+
+    //Crear la clave encriptada con la sal
+    this.password = await bcryptjs.hash(this.password,sal)
+})
+ userSchema.methods.compararPassword = async function(password){
+    return await bcryptjs.compare(password,this.password)
+ }
 
 const User = mongoose.model("User",userSchema)
 
