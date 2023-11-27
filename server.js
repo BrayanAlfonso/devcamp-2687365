@@ -3,6 +3,8 @@ const dotenv = require ('dotenv');
 const colors = require ('colors');
 const bootcampsRoutes = require('./routes/bootcampsRoutes')
 const coursesRoutes = require('./routes/coursesRoutes')
+const reviewsRoutes = require('./routes/reviewsRoutes')
+const usersRoutes = require('./routes/usersRoutes')
 const conectarDB = require('./config/db')
 
 //Configurar variables de entorno
@@ -18,6 +20,8 @@ const app= express();
 app.use(express.json())
 app.use('/bootcamps',bootcampsRoutes)
 app.use('/courses', coursesRoutes)
+app.use("/reviews", reviewsRoutes)
+app.use("/users", usersRoutes)
 
 
 
