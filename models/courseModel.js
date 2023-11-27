@@ -17,7 +17,6 @@ const courseSchema = new mongoose.Schema({
     weeks : {
         type:Number,
         required: ["El curso debe tener semanas establecidas"],
-        unique:true,
         max:[9,"Solo se aceptan 9 semanas para el curso"]
     },
     tuition : {
@@ -25,6 +24,7 @@ const courseSchema = new mongoose.Schema({
         required: ["El curso debe tener un precio asignado"]
     },
     minimumSkills : {
+        type:[String],
         required:["Debe asignar una habilidad"],
         enum:[ "Benniger" , "Intermediate" , "Advanced", "Expert" ]
     },
